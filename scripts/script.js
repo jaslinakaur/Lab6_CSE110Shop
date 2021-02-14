@@ -2,7 +2,14 @@
 
 window.addEventListener('DOMContentLoaded', () => {
   
-  var localStorage = window.localStorage;
+  /*var localStorage = window.localStorage;
+  var products = [];
+  var selectedProducts = [];
+  var cartCount = 0;
+
+  localStorage.setItem("selprod", selectedProducts );
+  localStorage.setItem("cartcount", selectedProducts.length);
+  */
 
   displayProducts();
 
@@ -19,7 +26,7 @@ async function getProducts() {
 }
 
 async function displayProducts() {
-  var products = [];
+  
   if (localStorage.getItem("products")) {
     //console("from local storage");
     products = JSON.parse(localStorage.getItem('products')) || [];
@@ -31,22 +38,35 @@ async function displayProducts() {
   let container = document.querySelector('#product-list');
 
   
-  console.log("SIZE OF PRODUCTS =" + products.length);
+ // console.log("SIZE OF PRODUCTS =" + products.length);
 
   products.forEach(product => {
-      console.log(product.image);
-      var prd = document.createElement('product-item');
-      prd.setAttribute("id", product.id );
-      prd.setAttribute("prod-title", product.title);
-      prd.setAttribute("prod-img", product.image);
-      prd.setAttribute("prod-price", product.price);
+      //console.log(product.image);
+
+      var prd = document.createElement('div');
+      prd.innerHTML = '<product-item id = "' + product.id + '" prod-title="'+ product.title + 
+      '" prod-img="' + product.image + '" prod-price="' + product.price + '"></product-item>';
+
+      
+
+      console.log(prd);
 
       container.appendChild(prd);
+     // console.log("added element");
+
       
   });
 
-    
+   selectedProducts = JSON.parse(localStorage.getItem("selprod"));
+   updateCart(selectedProducts.length) ;
 
 //console.log(products);
 }
+
+
+
+
+
+        
+
 
