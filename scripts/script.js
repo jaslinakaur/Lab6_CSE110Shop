@@ -6,15 +6,6 @@ window.addEventListener('DOMContentLoaded', () => {
 
   displayProducts();
 
-    /* li from the HTML document:
-    <!-- li class="product">
-    <img src="https://fakestoreapi.com/img/81fPKd-2AYL._AC_SL1500_.jpg" alt="Fjallraven - Foldstack No. 1 Backpack, Fits 15 Laptops" width=200>
-    <p class="title">Fjallraven - Foldstack No. 1 Backpack, Fits 15 Laptops</p>
-    <p class="price">$109.95</p>
-    <button onclick="alert('Added to Cart!')">Add to Cart</button>
-    </li -->
-    */
-
 });
 
 async function getProducts() {
@@ -37,6 +28,25 @@ async function displayProducts() {
     localStorage.setItem("products", JSON.stringify(products));
   }
 
-  console.log(products);
+  let container = document.querySelector('#product-list');
+
+  
+  console.log("SIZE OF PRODUCTS =" + products.length);
+
+  products.forEach(product => {
+      console.log(product.image);
+      var prd = document.createElement('product-item');
+      prd.setAttribute("id", product.id );
+      prd.setAttribute("prod-title", product.title);
+      prd.setAttribute("prod-img", product.image);
+      prd.setAttribute("prod-price", product.price);
+
+      container.appendChild(prd);
+      
+  });
+
+    
+
+//console.log(products);
 }
 
